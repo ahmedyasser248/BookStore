@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.PersonalInformationController">
+   <children>
+      <TextField fx:id="emailAddress" layoutX="315.0" layoutY="263.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="email" />
+      <TextField fx:id="password" layoutX="315.0" layoutY="299.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="password" />
+      <TextField fx:id="username" layoutX="315.0" layoutY="335.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="username" />
+      <TextField fx:id="firstName" layoutX="315.0" layoutY="371.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="firstname" />
+      <TextField fx:id="lastname" layoutX="315.0" layoutY="407.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="lastname" />
+      <TextField fx:id="phoneNumber" layoutX="315.0" layoutY="447.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="phone" />
+      <TextField fx:id="shippingAddress" layoutX="315.0" layoutY="486.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="shipping Address" />
+      <Button fx:id="saveButton" layoutX="329.0" layoutY="540.0" mnemonicParsing="false" onAction="#saveNewData" text="Save Data">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <Label layoutX="249.0" layoutY="267.0" text="email" />
+      <Label layoutX="236.0" layoutY="303.0" text="password" />
+      <Label layoutX="236.0" layoutY="375.0" text="first name" />
+      <Label layoutX="236.0" layoutY="339.0" text="username" />
+      <Label layoutX="235.0" layoutY="411.0" text="last name" />
+      <Label layoutX="251.0" layoutY="451.0" text="phone" />
+      <Label layoutX="199.0" layoutY="490.0" text="shipping Address" />
+   </children>
+</AnchorPane>

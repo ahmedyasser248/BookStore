@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="524.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ModifyBookController">
+   <children>
+      <TextField fx:id="searchBox" layoutX="215.0" layoutY="82.0" promptText="search" />
+      <Button layoutX="123.0" layoutY="82.0" mnemonicParsing="false" onAction="#search" text="search" />
+      <ComboBox fx:id="fields" layoutX="413.0" layoutY="82.0" prefWidth="150.0" promptText="choose field" />
+      <TextField fx:id="ISBN" layoutX="215.0" layoutY="129.0" promptText="ISBN" />
+      <TextField fx:id="title" layoutX="215.0" layoutY="163.0" promptText="title" />
+      <TextField fx:id="quantity" layoutX="216.0" layoutY="298.0" promptText="quantity" />
+      <Button layoutX="260.0" layoutY="456.0" mnemonicParsing="false" onAction="#modifyBook" text="update" />
+      <ComboBox fx:id="categories" layoutX="228.0" layoutY="411.0" prefWidth="150.0" promptText="category" />
+      <TextField fx:id="author" layoutX="216.0" layoutY="197.0" promptText="author" />
+      <TextField fx:id="publication" layoutX="215.0" layoutY="233.0" promptText="publication" />
+      <TextField fx:id="publisher" layoutX="215.0" layoutY="264.0" promptText="publisher" />
+      <TextField fx:id="year" layoutX="215.0" layoutY="371.0" promptText="year" />
+      <Label layoutX="128.0" layoutY="201.0" text="author" />
+      <Label layoutX="128.0" layoutY="237.0" text="publication" />
+      <Label layoutX="128.0" layoutY="268.0" text="publisher" />
+      <Label layoutX="128.0" layoutY="302.0" text="quantity" />
+      <Label layoutX="135.0" layoutY="371.0" text="year" />
+      <Label layoutX="128.0" layoutY="167.0" text="title" />
+      <Label layoutX="128.0" layoutY="141.0" text="ISBN" />
+      <TextField fx:id="sellingPrice" layoutX="215.0" layoutY="335.0" promptText="selling price" />
+      <Label layoutX="125.0" layoutY="339.0" text="selling price" />
+   </children>
+</AnchorPane>

@@ -20,10 +20,6 @@ public class loginController {
     @FXML
     TextField password;
     @FXML
-    RadioButton manager;
-    @FXML
-    RadioButton normalUser;
-    @FXML
     ToggleGroup user;
 
     @FXML
