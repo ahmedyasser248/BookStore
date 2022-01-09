@@ -38,6 +38,7 @@ public class loginController implements Initializable {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(query);
             if(rs.next()){
+
                 String passwordUser = rs.getString("password");
                 Boolean manager = rs.getBoolean("Manager");
                 System.out.println(manager);

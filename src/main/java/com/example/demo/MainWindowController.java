@@ -26,13 +26,13 @@ public class MainWindowController implements Initializable {
     @FXML
     TableColumn<Book,String> secondColumnCart;
     @FXML
-    TableColumn<Book,String> thirdColumnCart;
+    TableColumn<Book,Category> thirdColumnCart;
     @FXML
     TableColumn<Book,String> firstColumnSearch;
     @FXML
     TableColumn<Book,String> secondColumnSearch;
     @FXML
-    TableColumn<Book,String> thirdColumnSearch;
+    TableColumn<Book,Category> thirdColumnSearch;
     @FXML
     Button additionalOperationsButton;
 
@@ -48,13 +48,13 @@ public class MainWindowController implements Initializable {
         //System.out.println(comboBox.getSelectionModel().getSelectedItem());
         firstColumnCart.setCellValueFactory(new PropertyValueFactory<Book,String>("title"));
         secondColumnCart.setCellValueFactory(new PropertyValueFactory<Book,String>("author"));
-        thirdColumnCart.setCellValueFactory(new PropertyValueFactory<Book,String>("category"));
+        thirdColumnCart.setCellValueFactory(new PropertyValueFactory<Book,Category>("category"));
         firstColumnSearch.setCellValueFactory(new PropertyValueFactory<Book,String>("title"));
         secondColumnSearch.setCellValueFactory(new PropertyValueFactory<Book,String>("author"));
-        thirdColumnSearch.setCellValueFactory(new PropertyValueFactory<Book,String>("category"));
+        thirdColumnSearch.setCellValueFactory(new PropertyValueFactory<Book,Category>("category"));
         additionalOperationsButton.setVisible(utils.isManager);
-        cart.getItems().add(new Book("B1","a1","adf"));
-        cart.getItems().add(new Book("B2","a2","category"));
+        cart.getItems().add(new Book("B1","a1",Category.Science));
+        cart.getItems().add(new Book("B2","a2",Category.Science));
         cart.setPlaceholder(new Label("no data"));
 
     }

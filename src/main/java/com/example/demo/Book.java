@@ -7,11 +7,62 @@ public class Book {
     String publisher;
     String publication_year;
     String sellingPrice;
-    String category;
-    public Book(String title, String author, String category){
+    Category category;
+    int inStock;
+    int minQuantity;
+
+    public Book(String title, String author, Category category){
         this.author=author;
         this.title=title;
         this.category=category;
+    }
+
+    public int getInStock() {
+        return inStock;
+    }
+
+    public int getISBN() {
+        return ISBN;
+    }
+
+    public int getMinQuantity() {
+        return minQuantity;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public String getPublication_year() {
+        return publication_year;
+    }
+
+    public String getSellingPrice() {
+        return sellingPrice;
+    }
+
+    public void setISBN(int ISBN) {
+        this.ISBN = ISBN;
+    }
+
+    public void setInStock(int inStock) {
+        this.inStock = inStock;
+    }
+
+    public void setMinQuantity(int minQuantity) {
+        this.minQuantity = minQuantity;
+    }
+
+    public void setPublication_year(String publication_year) {
+        this.publication_year = publication_year;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public void setSellingPrice(String sellingPrice) {
+        this.sellingPrice = sellingPrice;
     }
     public String getTitle() {
         return title;
@@ -29,11 +80,11 @@ public class Book {
         this.author = author;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
