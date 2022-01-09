@@ -1,13 +1,14 @@
 package com.example.demo;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class BookOrders {
     String ISBN;
     String quantityOrdered;
-    Date orderDate;
+    Timestamp orderDate;
 
-    BookOrders(String ISBN, String quantityOrdered, Date date){
+    BookOrders(String ISBN, String quantityOrdered, Timestamp date){
         this.ISBN=ISBN;
         this.quantityOrdered=quantityOrdered;
         this.orderDate=date;
@@ -17,7 +18,7 @@ public class BookOrders {
         this.ISBN = ISBN;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(Timestamp orderDate) {
         this.orderDate = orderDate;
     }
 
