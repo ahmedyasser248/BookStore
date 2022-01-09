@@ -7,16 +7,18 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class utils {
+  static   Connection connection;
     public static Connection getConnection(){
+        return  connection;
+    }
+    public static void createConnection(){
         String myUrl = "jdbc:mysql://localhost/BookStore";
-        //set your username and password
-        Connection connection=null;
         try {
             connection = DriverManager.getConnection(myUrl,"ahmed","ahmedyasser248");
+            connection.setAutoCommit(false);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return  connection;
     }
     public static Boolean checkField(TextField textField){
         return textField.getText().isBlank()||textField.getText().isEmpty();

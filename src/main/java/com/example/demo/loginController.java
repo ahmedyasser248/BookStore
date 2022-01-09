@@ -2,6 +2,7 @@ package com.example.demo;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -9,10 +10,12 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.*;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class loginController {
+public class loginController implements Initializable {
     @FXML
     Pane root;
     @FXML
@@ -30,7 +33,7 @@ public class loginController {
             //BookStore is schema name
             String myUrl = "jdbc:mysql://localhost/BookStore";
             //set your username and password
-            Connection connection = DriverManager.getConnection(myUrl,"ahmed","ahmedyasser248");
+            Connection connection = utils.getConnection();
             String username = "'"+email.getText()+"'";
             String query = "SELECT * FROM USERS WHERE username ="+username;
             Statement st = connection.createStatement();
@@ -57,4 +60,8 @@ public class loginController {
         root.getChildren().setAll(singUpPane);
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        utils.createConnection();
+    }
 }
