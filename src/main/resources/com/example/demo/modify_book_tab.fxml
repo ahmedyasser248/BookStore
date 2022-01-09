@@ -5,30 +5,34 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="524.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ModifyBookController">
    <children>
-      <TextField fx:id="searchBox" layoutX="215.0" layoutY="82.0" promptText="search" />
-      <Button layoutX="123.0" layoutY="82.0" mnemonicParsing="false" onAction="#search" text="search" />
-      <ComboBox fx:id="fields" layoutX="413.0" layoutY="82.0" prefWidth="150.0" promptText="choose field" />
-      <TextField fx:id="ISBN" layoutX="215.0" layoutY="129.0" promptText="ISBN" />
-      <TextField fx:id="title" layoutX="215.0" layoutY="163.0" promptText="title" />
-      <TextField fx:id="quantity" layoutX="216.0" layoutY="298.0" promptText="quantity" />
-      <Button layoutX="260.0" layoutY="456.0" mnemonicParsing="false" onAction="#modifyBook" text="update" />
-      <ComboBox fx:id="categories" layoutX="228.0" layoutY="411.0" prefWidth="150.0" promptText="category" />
-      <TextField fx:id="author" layoutX="216.0" layoutY="197.0" promptText="author" />
-      <TextField fx:id="publication" layoutX="215.0" layoutY="233.0" promptText="publication" />
-      <TextField fx:id="publisher" layoutX="215.0" layoutY="264.0" promptText="publisher" />
-      <TextField fx:id="year" layoutX="215.0" layoutY="371.0" promptText="year" />
-      <Label layoutX="128.0" layoutY="201.0" text="author" />
-      <Label layoutX="128.0" layoutY="237.0" text="publication" />
-      <Label layoutX="128.0" layoutY="268.0" text="publisher" />
-      <Label layoutX="128.0" layoutY="302.0" text="quantity" />
-      <Label layoutX="135.0" layoutY="371.0" text="year" />
-      <Label layoutX="128.0" layoutY="167.0" text="title" />
-      <Label layoutX="128.0" layoutY="141.0" text="ISBN" />
-      <TextField fx:id="sellingPrice" layoutX="215.0" layoutY="335.0" promptText="selling price" />
-      <Label layoutX="125.0" layoutY="339.0" text="selling price" />
+      <Button layoutX="160.0" layoutY="100.0" mnemonicParsing="false" onAction="#search" text="search" />
+      <Label layoutX="188.0" layoutY="173.0" text="author" />
+      <Label layoutX="155.0" layoutY="208.0" text="publication" />
+      <Label layoutX="161.0" layoutY="240.0" text="publisher" />
+      <Label layoutX="161.0" layoutY="273.0" text="quantity" />
+      <Label layoutX="177.0" layoutY="374.0" text="year" />
+      <Label layoutX="191.0" layoutY="142.0" text="title" />
+      <Label layoutX="152.0" layoutY="303.0" text="selling price" />
       <Label fx:id="warning" layoutX="209.0" layoutY="48.0" prefHeight="16.0" prefWidth="193.0" />
+      <VBox alignment="CENTER_LEFT" layoutX="235.0" layoutY="66.0" prefHeight="395.0" prefWidth="214.0" spacing="10.0">
+         <children>
+            <TextField fx:id="searchBox" promptText="search by ISBN" />
+            <TextField fx:id="title" promptText="title" />
+            <TextField fx:id="author" promptText="author" />
+            <TextField fx:id="publication" promptText="publication" />
+            <TextField fx:id="publisher" promptText="publisher" />
+            <TextField fx:id="quantity" promptText="quantity" />
+            <TextField fx:id="sellingPrice" promptText="selling price" />
+            <TextField fx:id="inStockTf" promptText="stockIn" />
+            <TextField fx:id="year" promptText="year" />
+            <ComboBox fx:id="categories" prefWidth="150.0" promptText="category" />
+         </children>
+      </VBox>
+      <Button layoutX="285.0" layoutY="461.0" mnemonicParsing="false" onAction="#modifyBook" text="update" />
+      <Label layoutX="165.0" layoutY="341.0" text="stockin" />
    </children>
 </AnchorPane>

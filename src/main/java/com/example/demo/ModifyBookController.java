@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -16,14 +17,13 @@ public class ModifyBookController implements Initializable {
     Label warning;
     @FXML
     TextField searchBox;
-    @FXML
-    ComboBox<String> fields;
+
     @FXML
     ComboBox<String> categories;
     @FXML
     TextField title;
     @FXML
-    TextField ISBN;
+    TextField inStockTf;
     @FXML
     TextField author;
     @FXML
@@ -34,11 +34,16 @@ public class ModifyBookController implements Initializable {
     TextField year;
     @FXML
     TextField sellingPrice;
-
     @FXML
     TextField quantity;
     @FXML
     void search(){
+        ArrayList<Book> arr= Queries.searchByISBN(searchBox.getText(),utils.getConnection(),0);
+        if(arr!=null &&arr.get(0)!=null){
+            Book book = arr.get(0);
+
+        }
+        Book book =arr.get(0);
 
     }
     @FXML
