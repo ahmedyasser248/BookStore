@@ -22,24 +22,37 @@ public class MainWindowController implements Initializable {
     @FXML
     ComboBox<String> comboBox;
     @FXML
-    TableColumn<Book,String> firstColumn;
+    TableColumn<Book,String> firstColumnCart;
     @FXML
-    TableColumn<Book,String> secondColumn;
+    TableColumn<Book,String> secondColumnCart;
     @FXML
-    TableColumn<Book,String> thirdColumn;
+    TableColumn<Book,String> thirdColumnCart;
+    @FXML
+    TableColumn<Book,String> firstColumnSearch;
+    @FXML
+    TableColumn<Book,String> secondColumnSearch;
+    @FXML
+    TableColumn<Book,String> thirdColumnSearch;
+    @FXML
+    Button additionalOperationsButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         comboBox.getItems().removeAll(comboBox.getItems());
         //fields of books
-        comboBox.getItems().addAll("Option A", "Option B", "Option C");
+        comboBox.getItems().addAll("ISBN", "Title", "Publisher_Name","Publication_Year","Selling_Price","Category","Min_Quantity","In_Stock");
         //default field;
-        comboBox.getSelectionModel().select("Option B");
+        comboBox.getSelectionModel().select("ISBN");
         //method to get string what is selected
-        System.out.println(comboBox.getSelectionModel().getSelectedItem());
-        firstColumn.setCellValueFactory(new PropertyValueFactory<Book,String>("title"));
-        secondColumn.setCellValueFactory(new PropertyValueFactory<Book,String>("author"));
-        thirdColumn.setCellValueFactory(new PropertyValueFactory<Book,String>("category"));
+        //System.out.println(comboBox.getSelectionModel().getSelectedItem());
+        firstColumnCart.setCellValueFactory(new PropertyValueFactory<Book,String>("title"));
+        secondColumnCart.setCellValueFactory(new PropertyValueFactory<Book,String>("author"));
+        thirdColumnCart.setCellValueFactory(new PropertyValueFactory<Book,String>("category"));
+        firstColumnSearch.setCellValueFactory(new PropertyValueFactory<Book,String>("title"));
+        secondColumnSearch.setCellValueFactory(new PropertyValueFactory<Book,String>("author"));
+        thirdColumnSearch.setCellValueFactory(new PropertyValueFactory<Book,String>("category"));
+        additionalOperationsButton.setVisible(utils.isManager);
         cart.getItems().add(new Book("B1","a1","adf"));
         cart.getItems().add(new Book("B2","a2","category"));
         cart.setPlaceholder(new Label("no data"));

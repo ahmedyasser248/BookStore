@@ -38,12 +38,18 @@ public class loginController implements Initializable {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(query);
             if(rs.next()){
-                String passworduser = rs.getString("password");
-                if(!passworduser.equals(password.getText())){
+                String passwordUser = rs.getString("password");
+                Boolean manager = rs.getBoolean("Manager");
+                System.out.println(manager);
+                utils.setManager(manager);
+                if(!passwordUser.equals(password.getText())){
                     warning.setText("wrong password");
+                }else{
+                    Pane singUpPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainwindow.fxml")));
+                    utils.setUsername(email.getText());
+                    root.getChildren().setAll(singUpPane);
                 }
-                Pane singUpPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainwindow.fxml")));
-                root.getChildren().setAll(singUpPane);
+
             }else{
                 warning.setText("no username found");
             }

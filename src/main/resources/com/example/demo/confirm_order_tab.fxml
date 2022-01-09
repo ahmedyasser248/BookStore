@@ -8,22 +8,19 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ConfirmOrderBooksController">
    <children>
-      <TableView layoutX="54.0" layoutY="59.0" prefHeight="200.0" prefWidth="482.0">
+      <TableView fx:id="books" layoutX="131.0" layoutY="66.0" prefHeight="200.0" prefWidth="338.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
+          <TableColumn fx:id="firstColumn" prefWidth="100.0" text="ISBN" />
+          <TableColumn fx:id="secondColumn" prefWidth="111.0" text="quantity" />
+            <TableColumn fx:id="thirdColumn" prefWidth="126.0" text="order date" />
         </columns>
       </TableView>
-      <Button layoutX="148.0" layoutY="319.0" mnemonicParsing="false" text="confirm">
+      <Button layoutX="148.0" layoutY="319.0" mnemonicParsing="false" onAction="#confirmBook" text="confirm">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="363.0" layoutY="319.0" mnemonicParsing="false" text="delete">
+      <Button layoutX="363.0" layoutY="319.0" mnemonicParsing="false" onAction="#deleteBook" text="delete">
          <font>
             <Font size="20.0" />
          </font>

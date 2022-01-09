@@ -8,6 +8,20 @@ import java.sql.SQLException;
 
 public class utils {
   static   Connection connection;
+  static String currentUsername;
+  static Boolean isManager;
+  public static void setManager(Boolean manager){
+      isManager=manager;
+  }
+  public static Boolean getManager(){
+      return isManager;
+  }
+  public static void setUsername(String username){
+      currentUsername=username;
+  }
+  public static String getCurrentUsername(){
+      return currentUsername;
+  }
     public static Connection getConnection(){
         return  connection;
     }
