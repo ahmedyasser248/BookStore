@@ -9,16 +9,19 @@ public class Queries {
     static ArrayList<Book> searchByCategory(String categoryName, Connection conn){
         try {
             PreparedStatement getBooksByCategory
-                = conn.prepareStatement("select b.Title,a.Author_Name,b.category "
+                = conn.prepareStatement("select b.Title,a.Author_Name,b.category ,b.Min_Quantity,b.In_Stock "
                 + " from book as b, author as a"
                 + " where b.category = "+"?"+ " And b.ISBN = a.ISBN;");
             getBooksByCategory.setString(1,categoryName);
             ResultSet  result = getBooksByCategory.executeQuery();
             ArrayList<Book> output = new ArrayList<>();
             while (result.next()){
-                output.add( new Book(result.getString("Title"),
-                    result.getString("Author_Name"),
-                    Category.valueOf(result.getString("Category"))));
+                output.add(
+                    new Book(result.getString("Title"),
+                             result.getString("Author_Name"),
+                             Category.valueOf(result.getString("Category")),
+                             result.getInt("Min_Quantity"),
+                             result.getInt("In_Stock")));
             }
             return output;
         } catch (SQLException throwables) {
@@ -37,9 +40,12 @@ public class Queries {
             ResultSet  result = getBooksByCategory.executeQuery();
             ArrayList<Book> output = new ArrayList<>();
             while (result.next()){
-                output.add( new Book(result.getString("Title"),
-                    result.getString("Author_Name"),
-                    Category.valueOf(result.getString("Category"))));
+                output.add(
+                    new Book(result.getString("Title"),
+                        result.getString("Author_Name"),
+                        Category.valueOf(result.getString("Category")),
+                        result.getInt("Min_Quantity"),
+                        result.getInt("In_Stock")));
             }
             return output;
         } catch (SQLException throwables) {
@@ -58,9 +64,12 @@ public class Queries {
             ResultSet  result = getBooksByCategory.executeQuery();
             ArrayList<Book> output = new ArrayList<>();
             while (result.next()){
-                output.add( new Book(result.getString("Title"),
-                    result.getString("Author_Name"),
-                    Category.valueOf(result.getString("Category"))));
+                output.add(
+                    new Book(result.getString("Title"),
+                        result.getString("Author_Name"),
+                        Category.valueOf(result.getString("Category")),
+                        result.getInt("Min_Quantity"),
+                        result.getInt("In_Stock")));
             }
             return output;
         } catch (SQLException throwables) {
@@ -108,9 +117,12 @@ public class Queries {
 
              while (result.next()){
 
-                 output.add(new Book(result.getString("Title"),
-                     result.getString("Author_Name"),
-                     Category.valueOf(result.getString("Category"))));
+                 output.add(
+                     new Book(result.getString("Title"),
+                         result.getString("Author_Name"),
+                         Category.valueOf(result.getString("Category")),
+                         result.getInt("Min_Quantity"),
+                         result.getInt("In_Stock")));
 
              }
              return output;
@@ -165,26 +177,6 @@ public class Queries {
          } catch (SQLException throwables) {
              throwables.printStackTrace();
          }
-     }
-
-     static ArrayList<BookOrders> getBookOrders(Connection conn){
-         ArrayList<BookOrders> bookOrdersArray = new ArrayList<>();
-         try {
-             String query = "select * "
-                 + "from book_order";
-             PreparedStatement getBookOrders = conn.prepareStatement(query);
-             ResultSet bookOrders = getBookOrders.executeQuery();
-             while (bookOrders.next()){
-                 bookOrdersArray.add(new BookOrders(bookOrders.getString("ISBN"),
-                     bookOrders.getString("Quantity_Ordered"),
-                     bookOrders.getTimestamp("Order_Date")));
-             }
-
-
-         } catch (SQLException throwables) {
-             throwables.printStackTrace();
-         }
-         return bookOrdersArray;
      }
 
     public static void main(String[] args) {
