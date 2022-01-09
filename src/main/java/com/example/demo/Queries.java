@@ -153,6 +153,40 @@ public class Queries {
          return bookOrdersArray;
      }
 
+     static void promoteUser(String email,Connection conn){
+         try {
+             String query = "Update customer "
+                 + "set Manager = 1 where Email = ?";
+             PreparedStatement updateUserStatus = conn.prepareStatement(query);
+             updateUserStatus.setString(1,email);
+             updateUserStatus.execute();
+
+
+         } catch (SQLException throwables) {
+             throwables.printStackTrace();
+         }
+     }
+
+     static ArrayList<BookOrders> getBookOrders(Connection conn){
+         ArrayList<BookOrders> bookOrdersArray = new ArrayList<>();
+         try {
+             String query = "select * "
+                 + "from book_order";
+             PreparedStatement getBookOrders = conn.prepareStatement(query);
+             ResultSet bookOrders = getBookOrders.executeQuery();
+             while (bookOrders.next()){
+                 bookOrdersArray.add(new BookOrders(bookOrders.getString("ISBN"),
+                     bookOrders.getString("Quantity_Ordered"),
+                     bookOrders.getTimestamp("Order_Date")));
+             }
+
+
+         } catch (SQLException throwables) {
+             throwables.printStackTrace();
+         }
+         return bookOrdersArray;
+     }
+
     public static void main(String[] args) {
 
         try {
