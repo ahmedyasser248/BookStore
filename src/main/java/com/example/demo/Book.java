@@ -27,6 +27,13 @@ public class Book {
         this.title=title;
         this.category=category;
     }
+    public Book(String title, String author, Category category,int minQuantity,int inStock){
+        this.author=author;
+        this.title=title;
+        this.category=category;
+        this.inStock = inStock;
+        this.minQuantity = minQuantity;
+    }
 
     public int getInStock() {
         return inStock;
