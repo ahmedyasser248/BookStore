@@ -5,12 +5,23 @@ import javafx.scene.control.TextField;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 public class utils {
   static   Connection connection;
   static String currentUsername;
   static Boolean isManager;
-  public static void setManager(Boolean manager){
+    static Timestamp transactionStartDate;
+
+    public static Timestamp getTransactionStartDate() {
+        return transactionStartDate;
+    }
+
+    public static void setTransactionStartDate(Timestamp transactionStartDate) {
+        utils.transactionStartDate = transactionStartDate;
+    }
+
+    public static void setManager(Boolean manager){
       isManager=manager;
   }
   public static Boolean getManager(){
@@ -37,4 +48,5 @@ public class utils {
     public static Boolean checkField(TextField textField){
         return textField.getText().isBlank()||textField.getText().isEmpty();
     }
+
 }
