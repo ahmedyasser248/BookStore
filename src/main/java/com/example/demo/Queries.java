@@ -179,6 +179,22 @@ public class Queries {
          }
      }
 
+     static boolean getManagerialStatus(String email,Connection conn){
+         try {
+             String query = "Select Manager "
+                 + "from Manager where Email = ?";
+             PreparedStatement getStatus = conn.prepareStatement(query);
+             getStatus.setString(1,email);
+             ResultSet status = getStatus.executeQuery();
+             boolean result = status.getBoolean("Manager");
+             return result;
+
+         } catch (SQLException throwables) {
+             throwables.printStackTrace();
+         }
+         return false;
+     }
+
     public static void main(String[] args) {
 
         try {
