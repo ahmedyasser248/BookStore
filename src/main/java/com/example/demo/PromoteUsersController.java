@@ -14,7 +14,7 @@ public class PromoteUsersController {
         if(utils.checkField(search)){
             return;
         }
-        //TODO promote user;
+        Queries.promoteUser(search.getText(),utils.getConnection());
 
     }
 }
