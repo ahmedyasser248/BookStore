@@ -23,7 +23,7 @@ public class Queries {
                              result.getInt("Min_Quantity"),
                              result.getInt("In_Stock")));
             }
-            return output;
+            return mergeAuthors(output);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -47,7 +47,7 @@ public class Queries {
                         result.getInt("Min_Quantity"),
                         result.getInt("In_Stock")));
             }
-            return output;
+            return mergeAuthors(output);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -71,7 +71,7 @@ public class Queries {
                         result.getInt("Min_Quantity"),
                         result.getInt("In_Stock")));
             }
-            return output;
+            return mergeAuthors(output);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -125,7 +125,7 @@ public class Queries {
                          result.getInt("In_Stock")));
 
              }
-             return output;
+             return mergeAuthors(output);
          } catch (SQLException throwables) {
              throwables.printStackTrace();
          }
@@ -193,6 +193,20 @@ public class Queries {
              throwables.printStackTrace();
          }
          return false;
+     }
+
+     static public ArrayList<Book> mergeAuthors(ArrayList<Book> books){
+         for (int i = 1; i < books.size(); i++) {
+             if(books.get(i).getISBN().equals(books.get(i-1).getISBN())){
+                 Book book1 = books.get(i-1);
+                 Book book2 = books.remove(i);
+                 String authors = book1.author + " , " + book2.author;
+                 book1.setAuthor(authors);
+                 books.set(i-1,book1);
+                 i--;
+             }
+         }
+         return books;
      }
 
     public static void main(String[] args) {
