@@ -31,23 +31,8 @@ public class ConfirmOrderBooksController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //TODO query to get all books that should be ordered;
 
-        ArrayList<BookOrders> bookOrdersArray = new ArrayList<>();
-        try {
-            Connection conn = utils.getConnection();
-            String query = "select *"
-                + "from book_order";
-            PreparedStatement getBookOrders = conn.prepareStatement(query);
-            ResultSet bookOrders = getBookOrders.executeQuery();
-            while (bookOrders.next()){
-                bookOrdersArray.add(new BookOrders(bookOrders.getString("ISBN"),
-                                        bookOrders.getString("Quantity_Ordered"),
-                                        bookOrders.getTimestamp("Order_Date")));
-            }
+        ArrayList<BookOrders> bookOrdersArray = Queries.getBookOrders(utils.getConnection());
 
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
 
         //then add them to books
         firstColumn.setCellValueFactory(new PropertyValueFactory<BookOrders,String>("ISBN"));
