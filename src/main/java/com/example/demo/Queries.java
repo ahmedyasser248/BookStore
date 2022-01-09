@@ -34,7 +34,7 @@ public class Queries {
     static ArrayList<Book> searchByAuthor(String Author, Connection conn){
         try {
             PreparedStatement getBooksByCategory
-                = conn.prepareStatement("select b.Title,a.Author_Name,b.category "
+                = conn.prepareStatement("select b.Title,a.Author_Name,b.category ,b.Min_Quantity,b.In_Stock ,b.ISBN "
                 + " from book as b, author as a"
                 + " where a.Author_Name = "+"?"+ " And b.ISBN = a.ISBN;");
             getBooksByCategory.setString(1,Author);
@@ -59,7 +59,7 @@ public class Queries {
     static ArrayList<Book> searchByPublisher(String Author, Connection conn){
         try {
             PreparedStatement getBooksByCategory
-                = conn.prepareStatement("select b.Title,a.Author_Name,b.category "
+                = conn.prepareStatement("select b.Title,a.Author_Name,b.category ,b.Min_Quantity,b.In_Stock ,b.ISBN"
                 + " from book as b, author as a"
                 + " where b.Publisher_Name = "+"?"+ " And b.ISBN = a.ISBN;");
             getBooksByCategory.setString(1,Author);
@@ -108,7 +108,7 @@ public class Queries {
             equalityCond += " where b.Title = ";
         }*/
          try {
-             String query = "select b.Title,a.Author_Name,b.Category,b.ISBN "
+             String query = "select b.Title,a.Author_Name,b.Category,b.ISBN ,b.Min_Quantity,b.In_Stock ,b.ISBN"
                  + "from book as b , author as a"
                  + equalityCond+"?" + " And b.ISBN = a.ISBN;";
              PreparedStatement getBooks = conn.prepareStatement(query);
