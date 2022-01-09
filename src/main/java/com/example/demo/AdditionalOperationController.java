@@ -35,7 +35,7 @@ public class AdditionalOperationController {
     @FXML
     void openPlaceOrder(){
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("place_order_tab.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("confirm_order_tab.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setTitle("place order");

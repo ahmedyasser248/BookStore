@@ -19,7 +19,7 @@
                   <Font size="22.0" />
                </font>
             </Button>
-            <Button layoutX="58.0" layoutY="160.0" mnemonicParsing="false" onAction="#openPlaceOrder" text="place order">
+            <Button layoutX="58.0" layoutY="160.0" mnemonicParsing="false" onAction="#openPlaceOrder" text="confirm orders">
                <font>
                   <Font size="22.0" />
                </font>
