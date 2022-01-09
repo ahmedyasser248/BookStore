@@ -1,5 +1,10 @@
 package com.example.demo;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -26,6 +31,23 @@ public class ConfirmOrderBooksController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //TODO query to get all books that should be ordered;
 
+        ArrayList<BookOrders> bookOrdersArray = new ArrayList<>();
+        try {
+            Connection conn = utils.getConnection();
+            String query = "select *"
+                + "from book_order";
+            PreparedStatement getBookOrders = conn.prepareStatement(query);
+            ResultSet bookOrders = getBookOrders.executeQuery();
+            while (bookOrders.next()){
+                bookOrdersArray.add(new BookOrders(bookOrders.getString("ISBN"),
+                                        bookOrders.getString("Quantity_Ordered"),
+                                        bookOrders.getTimestamp("Order_Date")));
+            }
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
         //then add them to books
         firstColumn.setCellValueFactory(new PropertyValueFactory<BookOrders,String>("ISBN"));
@@ -36,7 +58,8 @@ public class ConfirmOrderBooksController implements Initializable {
     @FXML
     void confirmBook(){
         BookOrders order = books.getSelectionModel().getSelectedItem();
-        //TODO update confirm in database
+        // confirm the order in the DB
+        Queries.confirmOrder(order.ISBN,utils.getConnection());
         //remove from table
         books.getItems().remove(order);
     }

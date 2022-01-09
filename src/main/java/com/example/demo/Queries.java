@@ -120,6 +120,19 @@ public class Queries {
          return null;
      }
 
+     static void confirmOrder(String ISBN,Connection conn){
+
+
+         try {
+             String query = "Delete from book_order where ISBN = ?";
+             PreparedStatement deleteOrder = conn.prepareStatement(query);
+             deleteOrder.setString(1,ISBN);
+             deleteOrder.execute();
+         } catch (SQLException throwables) {
+             throwables.printStackTrace();
+         }
+     }
+
     public static void main(String[] args) {
 
         try {
@@ -128,7 +141,7 @@ public class Queries {
             //Class.forName(myDriver);
             Connection conn = null;
             conn = DriverManager.getConnection(myUrl, "root", "Soraislife443");
-            ArrayList<Book> result = search("Ahmed",conn,"Author");
+            ArrayList<Book> result = search("",conn,null);
             /*PreparedStatement getBooks = conn.prepareStatement("Select Title from book where ISBN = '12345678'");
             ResultSet output = getBooks.executeQuery();
             while (output.next()){
