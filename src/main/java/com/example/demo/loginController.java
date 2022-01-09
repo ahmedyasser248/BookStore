@@ -31,11 +31,10 @@ public class loginController implements Initializable {
     void login(){
         try {
             //BookStore is schema name
-            String myUrl = "jdbc:mysql://localhost/BookStore";
             //set your username and password
             Connection connection = utils.getConnection();
             String username = "'"+email.getText()+"'";
-            String query = "SELECT * FROM USERS WHERE username ="+username;
+            String query = "SELECT * FROM CUSTOMER WHERE Username ="+username;
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(query);
             if(rs.next()){
