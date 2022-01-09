@@ -1,16 +1,27 @@
 package com.example.demo;
 
+import java.util.Date;
+
 public class Book {
-    int ISBN;
+    String ISBN;
     String title;
     String author;
     String publisher;
     String publication_year;
-    String sellingPrice;
+    double sellingPrice;
     Category category;
     int inStock;
     int minQuantity;
-
+    public Book(String ISBN,String title,Category category,String publicationYear,double sellingPrice ,String publisher, int inStock,int minQuantity){
+        this.ISBN=ISBN;
+        this.category=category;
+        this.inStock=inStock;
+        this.minQuantity=minQuantity;
+        this.title=title;
+        this.sellingPrice=sellingPrice;
+        this.publisher=publisher;
+        this.publication_year=publicationYear;
+    }
     public Book(String title, String author, Category category){
         this.author=author;
         this.title=title;
@@ -21,7 +32,7 @@ public class Book {
         return inStock;
     }
 
-    public int getISBN() {
+    public String getISBN() {
         return ISBN;
     }
 
@@ -37,11 +48,11 @@ public class Book {
         return publication_year;
     }
 
-    public String getSellingPrice() {
+    public double getSellingPrice() {
         return sellingPrice;
     }
 
-    public void setISBN(int ISBN) {
+    public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
 
@@ -61,7 +72,7 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public void setSellingPrice(String sellingPrice) {
+    public void setSellingPrice(double sellingPrice) {
         this.sellingPrice = sellingPrice;
     }
     public String getTitle() {

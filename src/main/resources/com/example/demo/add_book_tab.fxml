@@ -19,6 +19,7 @@
             <TextField fx:id="year" layoutX="103.0" layoutY="235.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="year" />
             <TextField fx:id="sellingPrice" layoutX="103.0" layoutY="247.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="selling price" />
             <TextField fx:id="quantity" layoutX="103.0" layoutY="249.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="quantity" />
+            <TextField fx:id="inStock" maxWidth="-Infinity" promptText="instock" />
             <ComboBox fx:id="categories" prefWidth="150.0" promptText="category" />
             <Button mnemonicParsing="false" onAction="#addBook" text="ADD">
                <font>
