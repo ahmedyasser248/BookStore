@@ -8,5 +8,6 @@ public class User {
     String userName;
     String shippingAddress;
     String phone;
+    Boolean manager;
 
 }
