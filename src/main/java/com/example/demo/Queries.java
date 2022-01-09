@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.*;
 
 public class Queries {
-    Book[] searchByCategory(String categoryName, Connection conn){
+    Book[] searchByCategory(Category categoryName, Connection conn){
         try {
             PreparedStatement getBooksByCategory
                 = conn.prepareStatement("select b.Title,a.Author_Name,b.category"
@@ -17,7 +17,7 @@ public class Queries {
             while (result.next()){
                 output[i] = new Book(result.getString("Title"),
                     result.getString("Author_Name"),
-                    result.getString("Category"));
+                    Category.valueOf(result.getString("Category")));
                 i++;
             }
             return output;
