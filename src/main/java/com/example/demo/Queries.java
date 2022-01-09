@@ -9,7 +9,7 @@ public class Queries {
     static ArrayList<Book> searchByCategory(String categoryName, Connection conn){
         try {
             PreparedStatement getBooksByCategory
-                = conn.prepareStatement("select b.Title,a.Author_Name,b.category ,b.Min_Quantity,b.In_Stock "
+                = conn.prepareStatement("select b.Title,a.Author_Name,b.category ,b.Min_Quantity,b.In_Stock ,b.ISBN"
                 + " from book as b, author as a"
                 + " where b.category = "+"?"+ " And b.ISBN = a.ISBN;");
             getBooksByCategory.setString(1,categoryName);
@@ -21,7 +21,8 @@ public class Queries {
                              result.getString("Author_Name"),
                              Category.valueOf(result.getString("Category")),
                              result.getInt("Min_Quantity"),
-                             result.getInt("In_Stock")));
+                             result.getInt("In_Stock"),
+                             result.getString("ISBN")));
             }
             return mergeAuthors(output);
         } catch (SQLException throwables) {
@@ -45,7 +46,8 @@ public class Queries {
                         result.getString("Author_Name"),
                         Category.valueOf(result.getString("Category")),
                         result.getInt("Min_Quantity"),
-                        result.getInt("In_Stock")));
+                        result.getInt("In_Stock"),
+                        result.getString("ISBN")));
             }
             return mergeAuthors(output);
         } catch (SQLException throwables) {
@@ -69,7 +71,8 @@ public class Queries {
                         result.getString("Author_Name"),
                         Category.valueOf(result.getString("Category")),
                         result.getInt("Min_Quantity"),
-                        result.getInt("In_Stock")));
+                        result.getInt("In_Stock"),
+                        result.getString("ISBN")));
             }
             return mergeAuthors(output);
         } catch (SQLException throwables) {
@@ -105,7 +108,7 @@ public class Queries {
             equalityCond += " where b.Title = ";
         }*/
          try {
-             String query = "select b.Title,a.Author_Name,b.Category "
+             String query = "select b.Title,a.Author_Name,b.Category,b.ISBN "
                  + "from book as b , author as a"
                  + equalityCond+"?" + " And b.ISBN = a.ISBN;";
              PreparedStatement getBooks = conn.prepareStatement(query);
@@ -122,7 +125,8 @@ public class Queries {
                          result.getString("Author_Name"),
                          Category.valueOf(result.getString("Category")),
                          result.getInt("Min_Quantity"),
-                         result.getInt("In_Stock")));
+                         result.getInt("In_Stock"),
+                         result.getString("ISBN")));
 
              }
              return mergeAuthors(output);
