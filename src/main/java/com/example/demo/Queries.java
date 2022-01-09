@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class Queries {
     // TODO in case of multiple authors,what to do
-
     static ArrayList<Book> searchByCategory(String categoryName, Connection conn){
         try {
             PreparedStatement getBooksByCategory
@@ -28,13 +27,13 @@ public class Queries {
         return null;
     }
 
-    static ArrayList<Book> searchByAuthor(String categoryName, Connection conn){
+    static ArrayList<Book> searchByAuthor(String Author, Connection conn){
         try {
             PreparedStatement getBooksByCategory
                 = conn.prepareStatement("select b.Title,a.Author_Name,b.category "
                 + " from book as b, author as a"
-                + " where b.category = "+"?"+ " And b.ISBN = a.ISBN;");
-            getBooksByCategory.setString(1,categoryName);
+                + " where a.Author_Name = "+"?"+ " And b.ISBN = a.ISBN;");
+            getBooksByCategory.setString(1,Author);
             ResultSet  result = getBooksByCategory.executeQuery();
             ArrayList<Book> output = new ArrayList<>();
             while (result.next()){
@@ -49,20 +48,59 @@ public class Queries {
         return null;
     }
 
+    static ArrayList<Book> searchByPublisher(String Author, Connection conn){
+        try {
+            PreparedStatement getBooksByCategory
+                = conn.prepareStatement("select b.Title,a.Author_Name,b.category "
+                + " from book as b, author as a"
+                + " where b.Publisher_Name = "+"?"+ " And b.ISBN = a.ISBN;");
+            getBooksByCategory.setString(1,Author);
+            ResultSet  result = getBooksByCategory.executeQuery();
+            ArrayList<Book> output = new ArrayList<>();
+            while (result.next()){
+                output.add( new Book(result.getString("Title"),
+                    result.getString("Author_Name"),
+                    Category.valueOf(result.getString("Category"))));
+            }
+            return output;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
 
-     static ArrayList<Book> searchByISBN(String ISBN,Connection conn,int searchCriteria){
+    static ArrayList<Book> search(String searchTerm ,Connection conn,String searchCriteria){
+        if(searchCriteria == null){
+            return searchISBNorAuthor(searchTerm,conn);
+        }else if(searchCriteria.matches("Category")){
+            return searchByCategory(searchTerm,conn);
+        }else if(searchCriteria.matches("Author")){
+            return searchByAuthor(searchTerm,conn);
+        }else if(searchCriteria.equals("Publisher")){
+            return searchByPublisher(searchTerm,conn);
+        }
+        return null;
+    }
+
+
+     static ArrayList<Book> searchISBNorAuthor(String searchTerm,Connection conn){
         String equalityCond = "";
-        if(searchCriteria == 0){
+        if(searchTerm.matches("[0-9]{3}-[0-9]{2}-[0-9]{5}-[0-9]{2}-[0-9]")){
+            equalityCond += " where b.ISBN = ";
+        }else{
+            equalityCond += " where b.Title = ";
+        }
+        /*if(searchCriteria == 0){
             equalityCond += " where b.ISBN = ";
         }else if(searchCriteria == 1){
             equalityCond += " where b.Title = ";
-        }
+        }*/
          try {
              String query = "select b.Title,a.Author_Name,b.Category "
                  + "from book as b , author as a"
                  + equalityCond+"?" + " And b.ISBN = a.ISBN;";
              PreparedStatement getBooks = conn.prepareStatement(query);
-             getBooks.setString(1,ISBN);
+             getBooks.setString(1,searchTerm);
              System.out.println(getBooks.toString());
              ResultSet result = getBooks.executeQuery();
              ArrayList<Book> output = new ArrayList<>();
@@ -90,7 +128,7 @@ public class Queries {
             //Class.forName(myDriver);
             Connection conn = null;
             conn = DriverManager.getConnection(myUrl, "root", "Soraislife443");
-            ArrayList<Book> result = searchByCategory("Science",conn);
+            ArrayList<Book> result = search("Ahmed",conn,"Author");
             /*PreparedStatement getBooks = conn.prepareStatement("Select Title from book where ISBN = '12345678'");
             ResultSet output = getBooks.executeQuery();
             while (output.next()){
