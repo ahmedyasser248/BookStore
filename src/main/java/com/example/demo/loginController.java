@@ -21,6 +21,8 @@ public class loginController {
     TextField password;
     @FXML
     ToggleGroup user;
+    @FXML
+    Label warning;
 
     @FXML
     void login(){
@@ -29,24 +31,25 @@ public class loginController {
             String myUrl = "jdbc:mysql://localhost/BookStore";
             //set your username and password
             Connection connection = DriverManager.getConnection(myUrl,"ahmed","ahmedyasser248");
-            String query = "SELECT * FROM USERS";
+            String username = "'"+email.getText()+"'";
+            String query = "SELECT * FROM USERS WHERE username ="+username;
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(query);
-            while(rs.next()){
-                String name = rs.getString("email");
-                String pass = rs.getString("password");
-                System.out.println(name+"  "+pass);
+            if(rs.next()){
+                String passworduser = rs.getString("password");
+                if(!passworduser.equals(password.getText())){
+                    warning.setText("wrong password");
+                }
+                Pane singUpPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainwindow.fxml")));
+                root.getChildren().setAll(singUpPane);
+            }else{
+                warning.setText("no username found");
             }
-        } catch (SQLException e) {
+
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
 
-        //tODO check if user exists
-        if(user.getSelectedToggle().toString().contains("user")){
-            //normal user
-        }else{
-            //manager
-        }
     }
     @FXML
     void signUp() throws IOException {

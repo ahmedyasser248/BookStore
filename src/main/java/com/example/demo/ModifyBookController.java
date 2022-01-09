@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
@@ -11,6 +12,8 @@ import java.util.ResourceBundle;
 
 
 public class ModifyBookController implements Initializable {
+    @FXML
+    Label warning;
     @FXML
     TextField searchBox;
     @FXML
@@ -31,8 +34,7 @@ public class ModifyBookController implements Initializable {
     TextField year;
     @FXML
     TextField sellingPrice;
-    @FXML
-    DatePicker date;
+
     @FXML
     TextField quantity;
     @FXML

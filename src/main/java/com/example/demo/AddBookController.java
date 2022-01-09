@@ -12,8 +12,6 @@ import java.util.ResourceBundle;
 
 public class AddBookController implements Initializable {
     @FXML
-    DatePicker date;
-    @FXML
     ComboBox<String> categories;
     @FXML
     TextField title;

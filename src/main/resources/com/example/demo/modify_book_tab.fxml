@@ -6,7 +6,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="524.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ModifyBookController">
    <children>
       <TextField fx:id="searchBox" layoutX="215.0" layoutY="82.0" promptText="search" />
@@ -30,5 +29,6 @@
       <Label layoutX="128.0" layoutY="141.0" text="ISBN" />
       <TextField fx:id="sellingPrice" layoutX="215.0" layoutY="335.0" promptText="selling price" />
       <Label layoutX="125.0" layoutY="339.0" text="selling price" />
+      <Label fx:id="warning" layoutX="209.0" layoutY="48.0" prefHeight="16.0" prefWidth="193.0" />
    </children>
 </AnchorPane>
