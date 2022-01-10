@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 
 public class utils {
   static   Connection connection;
-  static String currentUsername;
+  static String currentUsername="ahmed";
   static Boolean isManager;
     static Timestamp transactionStartDate;
 

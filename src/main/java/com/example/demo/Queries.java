@@ -10,7 +10,7 @@ public class Queries {
         try {
             PreparedStatement getBooksByCategory
                 = conn.prepareStatement("select b.Title,a.Author_Name,b.category ,b.Min_Quantity,b.In_Stock ,b.ISBN"
-                + " from book as b, author as a"
+                + " from BOOK as b, AUTHOR as a"
                 + " where b.category = "+"?"+ " And b.ISBN = a.ISBN;");
             getBooksByCategory.setString(1,categoryName);
             ResultSet  result = getBooksByCategory.executeQuery();
@@ -35,7 +35,7 @@ public class Queries {
         try {
             PreparedStatement getBooksByCategory
                 = conn.prepareStatement("select b.Title,a.Author_Name,b.category ,b.Min_Quantity,b.In_Stock ,b.ISBN "
-                + " from book as b, author as a"
+                + " from BOOK as b, AUTHOR as a"
                 + " where a.Author_Name = "+"?"+ " And b.ISBN = a.ISBN;");
             getBooksByCategory.setString(1,Author);
             ResultSet  result = getBooksByCategory.executeQuery();
@@ -60,7 +60,7 @@ public class Queries {
         try {
             PreparedStatement getBooksByCategory
                 = conn.prepareStatement("select b.Title,a.Author_Name,b.category ,b.Min_Quantity,b.In_Stock ,b.ISBN"
-                + " from book as b, author as a"
+                + " from BOOK as b, AUTHOR as a"
                 + " where b.Publisher_Name = "+"?"+ " And b.ISBN = a.ISBN;");
             getBooksByCategory.setString(1,Author);
             ResultSet  result = getBooksByCategory.executeQuery();
@@ -82,7 +82,7 @@ public class Queries {
     }
 
     static ArrayList<Book> search(String searchTerm ,Connection conn,String searchCriteria){
-        if(searchCriteria == null){
+        if(searchCriteria.equals("ISBN")||searchCriteria.equals("Title")){
             return searchISBNorAuthor(searchTerm,conn);
         }else if(searchCriteria.matches("Category")){
             return searchByCategory(searchTerm,conn);
@@ -108,9 +108,9 @@ public class Queries {
             equalityCond += " where b.Title = ";
         }*/
          try {
-             String query = "select b.Title,a.Author_Name,b.Category,b.ISBN ,b.Min_Quantity,b.In_Stock ,b.ISBN"
-                 + "from book as b , author as a"
-                 + equalityCond+"?" + " And b.ISBN = a.ISBN;";
+             String query = "select b.Title,a.Author_Name,b.Category,b.ISBN ,b.Min_Quantity,b.In_Stock ,b.ISBN "
+                 + "from BOOK as b , AUTHOR as a"
+                 + equalityCond+"?" + " AND b.ISBN = a.ISBN;";
              PreparedStatement getBooks = conn.prepareStatement(query);
              getBooks.setString(1,searchTerm);
              System.out.println(getBooks.toString());

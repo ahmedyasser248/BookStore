@@ -11,6 +11,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 public class MainWindowController implements Initializable {
     @FXML
@@ -38,10 +41,10 @@ public class MainWindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        utils.createConnection();
         comboBox.getItems().removeAll(comboBox.getItems());
         //fields of books
-        comboBox.getItems().addAll("ISBN", "Title", "Publisher_Name","Publication_Year","Selling_Price","Category","Min_Quantity","In_Stock");
+        comboBox.getItems().addAll("ISBN", "Title", "Publisher","Category","Author");
         //default field;
         comboBox.getSelectionModel().select("ISBN");
         //method to get string what is selected
@@ -52,29 +55,57 @@ public class MainWindowController implements Initializable {
         firstColumnSearch.setCellValueFactory(new PropertyValueFactory<Book,String>("title"));
         secondColumnSearch.setCellValueFactory(new PropertyValueFactory<Book,String>("author"));
         thirdColumnSearch.setCellValueFactory(new PropertyValueFactory<Book,Category>("category"));
-        additionalOperationsButton.setVisible(utils.isManager);
-        cart.getItems().add(new Book("B1","a1",Category.Science));
-        cart.getItems().add(new Book("B2","a2",Category.Science));
+      //  additionalOperationsButton.setVisible(utils.isManager);
         cart.setPlaceholder(new Label("no data"));
 
     }
     @FXML
     void addResultFromSearch(){
+        resultOfSearch.getItems().removeAll();
         if(textField.getText().isEmpty()){
             return;
         }
-        //TODO query to get data from Search
-
+        String filter= comboBox.getSelectionModel().getSelectedItem();
+        ArrayList<Book> books = Queries.search(textField.getText(),utils.getConnection(),filter);
+        for (int  i = 0 ; i < books.size();i++){
+            if(books.get(i).inStock!=0)
+                resultOfSearch.getItems().add(books.get(i));
+        }
 
 
     }
     @FXML
     void deleteSelectedFromCart(){
+        Book book = cart.getSelectionModel().getSelectedItem();
         cart.getItems().remove(cart.getSelectionModel().getSelectedItem());
+        CartAccess.removeBookFromCart(book,utils.getConnection());
+        if(book.inStock==1){
+            resultOfSearch.getItems().add(book);
+        }
     }
     @FXML
-    void addSelectedToCart(){
+    void checkout(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("checkout.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("checkout");
+            stage.setScene(scene);
+            stage.show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
+    @FXML
+    void addSelectedToCart(){
+        Book book = resultOfSearch.getSelectionModel().getSelectedItem();
+        utils.setTransactionStartDate(Timestamp.valueOf(LocalDateTime.now()));
+        CartAccess.addBookToCart(book,utils.getTransactionStartDate(),utils.getConnection());
+        if(book.inStock==0){
+            resultOfSearch.getItems().remove(book);
+        }
+        cart.getItems().add(book);
     }
     @FXML
     void openEditPersonalInformation(){

@@ -29,5 +29,7 @@
       </TableView>
       <Button layoutX="126.0" layoutY="145.0" mnemonicParsing="false" onAction="#addResultFromSearch" text="search" />
       <Button fx:id="additionalOperationsButton" layoutX="588.0" layoutY="732.0" mnemonicParsing="false" onAction="#openAdditionOptions" text="additional operations" />
+      <Button layoutX="400.0" layoutY="494.0" mnemonicParsing="false" onAction="#deleteSelectedFromCart" text="delete from cart" />
+      <Button layoutX="588.0" layoutY="494.0" mnemonicParsing="false" onAction="#checkout" text="check out" />
    </children>
 </Pane>

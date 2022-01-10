@@ -71,18 +71,25 @@ public class AddBookController implements Initializable {
                     publisher.getText(),
                     inStockint,
                     quantityInt);
+        if(addBookToTable(book)&&addAuthorsToTable()){
+            utils.getConnection().commit();
+
+        }else{
+            utils.getConnection().rollback();
+            System.out.println("check data");
+        }
 
         }catch (Exception e){
-            //show a warning
+            e.printStackTrace();
+
         }
-        //TODO query to add book
 
     }
     @FXML
     Boolean addBookToTable(Book book){
         Connection connection =utils.getConnection();
         try{
-            String query = "INSERT INTO BOOK(ISBN,Title,Publisher_Name,Publication_year,SellingPrice,Category,Min_Quantity,In_Stock) VALUES(?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO BOOK(ISBN,Title,Publisher_Name,Publication_year,Selling_Price,Category,Min_Quantity,In_Stock) VALUES(?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,book.getISBN());
             preparedStatement.setString(2, book.getTitle());
@@ -93,7 +100,6 @@ public class AddBookController implements Initializable {
             preparedStatement.setInt(7,book.getMinQuantity());
             preparedStatement.setInt(8,book.getInStock());
             preparedStatement.execute();
-            connection.commit();
 
 
         }catch (SQLException e){
@@ -102,8 +108,22 @@ public class AddBookController implements Initializable {
         }
         return true;
     }
-    @FXML
+
     Boolean addAuthorsToTable(){
+        String array[] =authors.getText().split(",");
+        Connection connection= utils.getConnection();
+        try{
+            String query = "INSERT INTO AUTHOR(ISBN,Author_Name)VALUES(?,?)";
+            for (int  i = 0 ; i < array.length;i++){
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, ISBN.getText());
+                preparedStatement.setString(2,array[i]);
+                preparedStatement.execute();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
         return true;
     }
 }

@@ -6,7 +6,7 @@ public class CartAccess {
 
     private static int getSoldQuantityInCurrentSession(Book book,Connection connection){
         int quantity=0;
-        String query="SELECT * FROM BOOK_SALE AS Count WHERE ISBN = ? "+
+        String query="SELECT * FROM Book_Sale AS Count WHERE ISBN = ? "+
                 " AND Customer_Username = ? "+
                 " And Session_Start_Date = ? ";
         try {
