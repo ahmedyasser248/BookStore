@@ -17,7 +17,7 @@ public class ReportAccess {
             String path="TotalSalesInPreviousMonth.jrxml";
             JasperDesign jasperDesign= JRXmlLoader.load(path);
             String query= "SELECT *" +
-                    "\tFROM Book AS B,Book_Sale AS BS\n" +
+                    "\tFROM BOOK AS B,Book_Sale AS BS\n" +
                     "    WHERE B.ISBN=BS.ISBN AND BS.Sale_Date >= CURDATE() - INTERVAL 1 MONTH AND \n" +
                     "    BS.Sale_Date < CURDATE() + INTERVAL 1 DAY;";
 
@@ -38,7 +38,7 @@ public class ReportAccess {
             String path="TopTenSellingBooks.jrxml";
             JasperDesign jasperDesign= JRXmlLoader.load(path);
             String query= "SELECT * \n" +
-                    "FROM Book AS B , Book_Sale AS BS\n" +
+                    "FROM BOOK AS B , Book_Sale AS BS\n" +
                     "WHERE B.ISBN=BS.ISBN \n" +
                     "AND B.ISBN IN\n" +
                     "      (SELECT B.ISBN\n" +
@@ -66,11 +66,11 @@ public class ReportAccess {
             String path="TopFiveCustomers.jrxml";
             JasperDesign jasperDesign= JRXmlLoader.load(path);
             String query= "SELECT * \n" +
-                    "FROM Book_Sale AS BS,Customer AS C\n" +
+                    "FROM Book_Sale AS BS,CUSTOMER AS C\n" +
                     "WHERE BS.Customer_Username=C.Username \n" +
                     "AND C.Username IN\n" +
                     "\t(SELECT Customer_Username\n" +
-                    "\tFROM Book_Sale AS BS,Customer AS C\n" +
+                    "\tFROM Book_Sale AS BS,CUSTOMER AS C\n" +
                     "\tWHERE BS.Customer_Username = C.Username \n" +
                     "\tGROUP BY Customer_Username\n" +
                     "\tORDER BY SUM(BS.Sold_Quantity) DESC)";

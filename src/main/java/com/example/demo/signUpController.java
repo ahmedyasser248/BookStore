@@ -59,6 +59,7 @@ public class signUpController {
             Pane singUpPane = null;
             try {
                 utils.setManager(manager);
+                utils.setUsername(username.getText());
                 singUpPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainwindow.fxml")));
                 root.getChildren().setAll(singUpPane);
             } catch (IOException e) {
