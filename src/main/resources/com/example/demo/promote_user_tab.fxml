@@ -4,11 +4,17 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="275.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.PromoteUsersController">
    <children>
-      <TextField fx:id="search" layoutX="158.0" layoutY="123.0" promptText="enter user email" />
+      <TextField fx:id="search" layoutX="158.0" layoutY="123.0" promptText="enter user's username" />
       <Button layoutX="353.0" layoutY="123.0" mnemonicParsing="false" onAction="#promote" text="promote" />
       <Label fx:id="message" layoutX="171.0" layoutY="171.0" prefHeight="16.0" prefWidth="171.0" />
+      <Label layoutX="153.0" layoutY="85.0" text="enter user's username">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
