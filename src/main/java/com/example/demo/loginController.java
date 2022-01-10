@@ -30,6 +30,11 @@ public class loginController implements Initializable {
     @FXML
     void login(){
         try {
+            warning.setText("");
+            if(utils.checkField(email)||utils.checkField(password)){
+                warning.setText("complete data");
+                return;
+            }
             //BookStore is schema name
             //set your username and password
             Connection connection = utils.getConnection();

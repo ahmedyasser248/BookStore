@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.w3c.dom.Text;
 
@@ -35,6 +36,8 @@ public class AddBookController implements Initializable {
     TextField quantity;
     @FXML
     TextField inStock;
+    @FXML
+    Label warning;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -54,7 +57,11 @@ public class AddBookController implements Initializable {
         sellingPrice.getText().isBlank()
         ||authors.getText().isBlank()||
         publisher.getText().isBlank()){
-            System.out.println("error occurred");
+            warning.setText("complete data");
+            return;
+        }
+        if(!Validator.validateISBN(ISBN.getText())){
+            warning.setText("check ISBN format");
             return;
         }
         try{

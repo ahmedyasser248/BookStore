@@ -41,7 +41,6 @@ public class MainWindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        utils.createConnection();
         comboBox.getItems().removeAll(comboBox.getItems());
         //fields of books
         comboBox.getItems().addAll("ISBN", "Title", "Publisher","Category","Author");
@@ -55,7 +54,7 @@ public class MainWindowController implements Initializable {
         firstColumnSearch.setCellValueFactory(new PropertyValueFactory<Book,String>("title"));
         secondColumnSearch.setCellValueFactory(new PropertyValueFactory<Book,String>("author"));
         thirdColumnSearch.setCellValueFactory(new PropertyValueFactory<Book,Category>("category"));
-      //  additionalOperationsButton.setVisible(utils.isManager);
+        additionalOperationsButton.setVisible(utils.isManager);
         cart.setPlaceholder(new Label("no data"));
 
     }

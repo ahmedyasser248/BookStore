@@ -39,6 +39,10 @@ public class signUpController {
 
     @FXML
     void RegisterUser(){
+        if(!Validator.validateEmail(emailAddress.getText())){
+            warning.setText("wrong email format");
+            return;
+        }
         if(shippingAddress.getText().isEmpty()||username.getText().isEmpty()||password.getText().isEmpty()||lastname.getText().isEmpty()){
             warning.setText("complete data");
             return;
@@ -48,12 +52,12 @@ public class signUpController {
             return;
         }
         Boolean manager = user.getSelectedToggle().toString().contains("manager");
-        System.out.println(manager);
         User user1 = new User(firstName.getText(), lastname.getText(), username.getText(), emailAddress.getText(), password.getText(), phoneNumber.getText(), shippingAddress.getText(), manager);
        Boolean result =signup(user1);
         if(result){
             Pane singUpPane = null;
             try {
+                utils.setManager(manager);
                 singUpPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainwindow.fxml")));
                 root.getChildren().setAll(singUpPane);
             } catch (IOException e) {

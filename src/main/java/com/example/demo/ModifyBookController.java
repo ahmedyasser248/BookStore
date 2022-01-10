@@ -172,6 +172,5 @@ public class ModifyBookController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         categories.getItems().removeAll(categories.getItems());
         categories.getItems().addAll(Category.Religion,Category.History,Category.Art,Category.Geography,Category.Science);
-        utils.createConnection();
     }
 }
