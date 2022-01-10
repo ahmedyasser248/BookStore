@@ -3,16 +3,12 @@ package com.example.demo;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import org.w3c.dom.Text;
-
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.Year;
 import java.util.ResourceBundle;
 
 public class AddBookController implements Initializable {
@@ -77,6 +73,7 @@ public class AddBookController implements Initializable {
                     quantityInt);
         if(addBookToTable(book)&&addAuthorsToTable()){
             utils.getConnection().commit();
+            warning.setText("book is added");
 
         }else{
             utils.getConnection().rollback();

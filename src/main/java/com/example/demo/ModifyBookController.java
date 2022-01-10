@@ -54,12 +54,7 @@ public class ModifyBookController implements Initializable {
             warning.setText("wrong ISBN format");
             return;
         }
-        if(utils.checkField(publisher)||utils.checkField(sellingPrice)||utils.checkField(year)||utils.checkField(quantity)||utils.checkField(inStockTf)||utils.checkField(title)||utils.checkField(author)||
-        utils.checkField(sellingPrice)){
-            warning.setText("complete your data");
-            return;
 
-        }
         utils.createConnection();
         String query = "select * "
                 + "from BOOK as b , AUTHOR as a "
@@ -113,6 +108,12 @@ public class ModifyBookController implements Initializable {
     }
     @FXML
     void modifyBook()  {
+        if(utils.checkField(publisher)||utils.checkField(sellingPrice)||utils.checkField(year)||utils.checkField(quantity)||utils.checkField(inStockTf)||utils.checkField(title)||utils.checkField(author)||
+                utils.checkField(sellingPrice)){
+            warning.setText("complete your data");
+            return;
+
+        }
 
             if(!updateData()){
                 warning.setText("check your modified data");
