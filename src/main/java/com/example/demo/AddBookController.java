@@ -2,9 +2,12 @@ package com.example.demo;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +15,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class AddBookController implements Initializable {
+    Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+    static Stage stage;
     @FXML
     ComboBox<Category> categories;
     @FXML
@@ -50,11 +55,15 @@ public class AddBookController implements Initializable {
         sellingPrice.getText().isBlank()
         ||authors.getText().isBlank()||
         publisher.getText().isBlank()){
-            warning.setText("complete data");
+            a.setAlertType(Alert.AlertType.WARNING);
+            a.setContentText("complete data");
+            a.show();
             return;
         }
         if(!Validator.validateISBN(ISBN.getText())){
-            warning.setText("check ISBN format");
+            a.setAlertType(Alert.AlertType.WARNING);
+            a.setContentText("check ISBN format");
+            a.show();
             return;
         }
         try{
@@ -73,9 +82,15 @@ public class AddBookController implements Initializable {
                     quantityInt);
         if(addBookToTable(book)&&addAuthorsToTable()){
             utils.getConnection().commit();
-            warning.setText("book is added");
+            a.setAlertType(Alert.AlertType.CONFIRMATION);
+            a.setContentText("book is added");
+            a.show();
+            stage.close();
 
         }else{
+            a.setAlertType(Alert.AlertType.WARNING);
+            a.setContentText("book is not added");
+            a.show();
             utils.getConnection().rollback();
             System.out.println("check data");
         }

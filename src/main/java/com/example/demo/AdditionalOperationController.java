@@ -14,6 +14,7 @@ public class AdditionalOperationController {
             Stage stage = new Stage();
             stage.setTitle(" add book");
             stage.setScene(scene);
+            AddBookController.stage=stage;
             stage.show();
         }catch (Exception e){
             e.printStackTrace();
