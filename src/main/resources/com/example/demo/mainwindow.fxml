@@ -15,8 +15,9 @@
       <TableView fx:id="resultOfSearch" layoutX="52.0" layoutY="188.0" prefHeight="200.0" prefWidth="660.0">
         <columns>
           <TableColumn fx:id="firstColumnSearch" prefWidth="210.0" text="title" />
-          <TableColumn fx:id="secondColumnSearch" prefWidth="242.0" text="author" />
-            <TableColumn fx:id="thirdColumnSearch" prefWidth="207.0" text="category" />
+          <TableColumn fx:id="secondColumnSearch" prefWidth="198.0" text="author" />
+            <TableColumn fx:id="thirdColumnSearch" prefWidth="140.0" text="category" />
+            <TableColumn fx:id="fourthColumnSearch" prefWidth="111.0" text="price" />
         </columns>
       </TableView>
       <Button layoutX="20.0" layoutY="756.0" mnemonicParsing="false" onAction="#openEditPersonalInformation" text="Edit personal data" />
@@ -24,14 +25,15 @@
       <TableView fx:id="cart" layoutX="47.0" layoutY="428.0" prefHeight="207.0" prefWidth="669.0">
         <columns>
           <TableColumn fx:id="firstColumnCart" prefWidth="194.0" text="title" />
-          <TableColumn fx:id="secondColumnCart" prefWidth="288.0" text="author" />
-            <TableColumn fx:id="thirdColumnCart" prefWidth="186.0" text="category" />
+          <TableColumn fx:id="secondColumnCart" prefWidth="256.0" text="author" />
+            <TableColumn fx:id="thirdColumnCart" prefWidth="109.0" text="category" />
+            <TableColumn fx:id="fourthColumnCart" prefWidth="109.0" text="price" />
         </columns>
       </TableView>
       <Button layoutX="126.0" layoutY="145.0" mnemonicParsing="false" onAction="#addResultFromSearch" text="search" />
       <Button fx:id="additionalOperationsButton" layoutX="614.0" layoutY="756.0" mnemonicParsing="false" onAction="#openAdditionOptions" text="additional operations" />
       <Button layoutX="82.0" layoutY="673.0" mnemonicParsing="false" onAction="#deleteSelectedFromCart" text="delete from cart" />
       <Button layoutX="341.0" layoutY="756.0" mnemonicParsing="false" onAction="#checkout" text="check out" />
-      <Label layoutX="582.0" layoutY="665.0" prefHeight="24.0" prefWidth="112.0" text="quanitty : " />
+      <Label fx:id="label" layoutX="582.0" layoutY="665.0" prefHeight="24.0" prefWidth="112.0" text="quanitty : " />
    </children>
 </Pane>

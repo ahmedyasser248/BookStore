@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 public class MainWindowController implements Initializable {
+    double totalPrice =0;
     @FXML
     TableView<Book> cart;
     @FXML
@@ -31,13 +30,19 @@ public class MainWindowController implements Initializable {
     @FXML
     TableColumn<Book,Category> thirdColumnCart;
     @FXML
+    TableColumn<Book,Double>fourthColumnCart;
+    @FXML
     TableColumn<Book,String> firstColumnSearch;
     @FXML
     TableColumn<Book,String> secondColumnSearch;
     @FXML
     TableColumn<Book,Category> thirdColumnSearch;
     @FXML
+    TableColumn<Book,Double> fourthColumnSearch;
+    @FXML
     Button additionalOperationsButton;
+    @FXML
+    Label label;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -51,9 +56,11 @@ public class MainWindowController implements Initializable {
         firstColumnCart.setCellValueFactory(new PropertyValueFactory<Book,String>("title"));
         secondColumnCart.setCellValueFactory(new PropertyValueFactory<Book,String>("author"));
         thirdColumnCart.setCellValueFactory(new PropertyValueFactory<Book,Category>("category"));
+        fourthColumnCart.setCellValueFactory(new PropertyValueFactory<Book,Double>("sellingPrice"));
         firstColumnSearch.setCellValueFactory(new PropertyValueFactory<Book,String>("title"));
         secondColumnSearch.setCellValueFactory(new PropertyValueFactory<Book,String>("author"));
         thirdColumnSearch.setCellValueFactory(new PropertyValueFactory<Book,Category>("category"));
+        fourthColumnSearch.setCellValueFactory(new PropertyValueFactory<Book,Double>("sellingPrice"));
         additionalOperationsButton.setVisible(utils.isManager);
         cart.setPlaceholder(new Label("no data"));
 
@@ -67,17 +74,23 @@ public class MainWindowController implements Initializable {
         String filter= comboBox.getSelectionModel().getSelectedItem();
         ArrayList<Book> books = Queries.search(textField.getText(),utils.getConnection(),filter);
         for (int  i = 0 ; i < books.size();i++){
-            if(books.get(i).inStock!=0)
+            if(books.get(i).inStock!=0){
                 resultOfSearch.getItems().add(books.get(i));
+            }
         }
 
 
     }
     @FXML
     void deleteSelectedFromCart(){
+        if(cart.getSelectionModel().getSelectedItem()==null){
+            return;
+        }
         Book book = cart.getSelectionModel().getSelectedItem();
         cart.getItems().remove(cart.getSelectionModel().getSelectedItem());
         CartAccess.removeBookFromCart(book,utils.getConnection());
+        totalPrice -=book.sellingPrice;
+        label.setText("total price : "+ totalPrice);
         if(book.inStock==1){
             resultOfSearch.getItems().add(book);
         }
@@ -85,11 +98,13 @@ public class MainWindowController implements Initializable {
     @FXML
     void checkout(){
         try{
+            cart.getItems().removeAll();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("checkout.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setTitle("checkout");
             stage.setScene(scene);
+            CheckOutController.stage=stage;
             stage.show();
         }catch (Exception e){
             e.printStackTrace();
@@ -98,6 +113,9 @@ public class MainWindowController implements Initializable {
 
     @FXML
     void addSelectedToCart(){
+        if(resultOfSearch.getSelectionModel().getSelectedItem()==null){
+            return;
+        }
         Book book = resultOfSearch.getSelectionModel().getSelectedItem();
         utils.setTransactionStartDate(Timestamp.valueOf(LocalDateTime.now()));
         CartAccess.addBookToCart(book,utils.getTransactionStartDate(),utils.getConnection());
@@ -105,6 +123,8 @@ public class MainWindowController implements Initializable {
             resultOfSearch.getItems().remove(book);
         }
         cart.getItems().add(book);
+        totalPrice +=book.sellingPrice;
+        label.setText("total price : "+ totalPrice);
     }
     @FXML
     void openEditPersonalInformation(){
