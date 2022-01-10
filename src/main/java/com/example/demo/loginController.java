@@ -3,10 +3,7 @@ package com.example.demo;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -27,12 +24,14 @@ public class loginController implements Initializable {
     @FXML
     Label warning;
 
+    Alert a = new Alert(Alert.AlertType.WARNING);
     @FXML
     void login(){
         try {
-            warning.setText("");
             if(utils.checkField(email)||utils.checkField(password)){
-                warning.setText("complete data");
+                a.setContentText("complete your data");
+                a.show();
+                //warning.setText("complete data");
                 return;
             }
             //BookStore is schema name
@@ -49,7 +48,9 @@ public class loginController implements Initializable {
                 System.out.println(manager);
                 utils.setManager(manager);
                 if(!passwordUser.equals(password.getText())){
-                    warning.setText("wrong password");
+                    a.setContentText("wrong password");
+                    a.show();
+                    //warning.setText("wrong password");
                 }else{
                     Pane singUpPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainwindow.fxml")));
                     utils.setUsername(email.getText());
@@ -57,7 +58,8 @@ public class loginController implements Initializable {
                 }
 
             }else{
-                warning.setText("no username found");
+                a.setContentText("no ysernam found");
+                a.show();
             }
 
         } catch (SQLException | IOException e) {

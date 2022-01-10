@@ -177,16 +177,14 @@ public class Queries {
          return bookOrdersArray;
      }
 
-     static void promoteUser(String email,Connection conn){
+     static void promoteUser(String username,Connection conn){
          try {
              String query = "Update CUSTOMER "
-                 + "set Manager = 1 where Email = ?";
+                 + "set Manager = 1 where Username = ?";
              PreparedStatement updateUserStatus = conn.prepareStatement(query);
-             updateUserStatus.setString(1,email);
+             updateUserStatus.setString(1,username);
              updateUserStatus.execute();
              conn.commit();
-
-
          } catch (SQLException throwables) {
              throwables.printStackTrace();
          }
@@ -200,7 +198,7 @@ public class Queries {
              getStatus.setString(1,username);
 
              ResultSet status = getStatus.executeQuery();
-             String result = status.getString("Username");
+             //String result = status.getString("Username");
              conn.commit();
              return status.next();
 

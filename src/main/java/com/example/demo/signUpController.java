@@ -2,10 +2,7 @@ package com.example.demo;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
@@ -36,19 +33,23 @@ public class signUpController {
     ToggleGroup user;
     @FXML
     Label warning;
-
+    Alert a = new Alert(Alert.AlertType.WARNING);
     @FXML
     void RegisterUser(){
-        if(!Validator.validateEmail(emailAddress.getText())){
-            warning.setText("wrong email format");
-            return;
-        }
+
         if(shippingAddress.getText().isEmpty()||username.getText().isEmpty()||password.getText().isEmpty()||lastname.getText().isEmpty()){
-            warning.setText("complete data");
+            a.setContentText("complete data");
+            a.show();
             return;
         }
         if(firstName.getText().isEmpty()||emailAddress.getText().isEmpty()||phoneNumber.getText().isEmpty()){
-            warning.setText("complete data");
+            a.setContentText("complete data");
+            a.show();
+            return;
+        }
+        if(!Validator.validateEmail(emailAddress.getText())){
+            a.setContentText("wrong format");
+            a.show();
             return;
         }
         Boolean manager = user.getSelectedToggle().toString().contains("manager");
@@ -61,11 +62,14 @@ public class signUpController {
                 singUpPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainwindow.fxml")));
                 root.getChildren().setAll(singUpPane);
             } catch (IOException e) {
+                a.setContentText("try again");
+                a.show();
                 e.printStackTrace();
             }
 
         }else{
-            warning.setText("check data you entered");
+            a.setContentText("check data you entered");
+            a.show();
         }
     }
     Boolean signup(User user){

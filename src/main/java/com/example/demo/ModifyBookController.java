@@ -2,10 +2,7 @@ package com.example.demo;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -19,6 +16,7 @@ import java.util.ResourceBundle;
 
 
 public class ModifyBookController implements Initializable {
+    Alert a = new Alert(Alert.AlertType.WARNING);
     String isbn;
     String authors;
     @FXML
@@ -46,16 +44,18 @@ public class ModifyBookController implements Initializable {
     @FXML
     void search(){
         if(utils.checkField(searchBox)){
-            warning.setText("search is empty");
+            a.setContentText("search is empty");
+            a.show();
+           // warning.setText("search is empty");
             return;
 
         }
         if(!Validator.validateISBN(searchBox.getText())){
-            warning.setText("wrong ISBN format");
+            a.setContentText("wrong ISBN format");
+            a.show();
+           // warning.setText("wrong ISBN format");
             return;
         }
-
-        utils.createConnection();
         String query = "select * "
                 + "from BOOK as b , AUTHOR as a "
                 + "WHERE b.ISBN="+"?" + " And b.ISBN = a.ISBN";
@@ -67,8 +67,8 @@ public class ModifyBookController implements Initializable {
             ResultSet result = getBooks.executeQuery();
 
             if(!result.next()){
-                //not found
-                System.out.println("not found");
+               a.setContentText("no book with this ISBN");
+                a.show();
             }else{
                isbn = result.getString("ISBN");
                 authors = result.getString("Author_Name");
@@ -110,17 +110,23 @@ public class ModifyBookController implements Initializable {
     void modifyBook()  {
         if(utils.checkField(publisher)||utils.checkField(sellingPrice)||utils.checkField(year)||utils.checkField(quantity)||utils.checkField(inStockTf)||utils.checkField(title)||utils.checkField(author)||
                 utils.checkField(sellingPrice)){
-            warning.setText("complete your data");
+            a.setContentText("complete your data");
+            a.show();
+            //warning.setText("complete your data");
             return;
-
         }
 
             if(!updateData()){
-                warning.setText("check your modified data");
-                System.out.println("error occurred");
+                a.setContentText("a problem in your modified data");
+                a.show();
+                //warning.setText("check your modified data");
+
             }else{
                 try {
                     utils.getConnection().commit();
+                    a.setAlertType(Alert.AlertType.CONFIRMATION);
+                    a.setContentText("done successfully");
+                    a.show();
                 } catch (SQLException e) {
                     e.printStackTrace();
                     try {

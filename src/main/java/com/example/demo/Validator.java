@@ -7,6 +7,9 @@ public class Validator {
     public static boolean validateEmail(String email){
         return email.matches("^(.+)@(.+)$");
     }
-
+ public static void main(String[] args) {
+    String ahmed ="adad@" ;
+     System.out.println(validateEmail(ahmed));
+}
 
 }
