@@ -201,6 +201,7 @@ public class Queries {
 
              ResultSet status = getStatus.executeQuery();
              String result = status.getString("Username");
+             conn.commit();
              return status.next();
 
          } catch (SQLException throwables) {
