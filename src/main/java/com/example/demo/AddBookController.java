@@ -42,10 +42,7 @@ public class AddBookController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         categories.getItems().removeAll(categories.getItems());
-        //fields of books
         categories.getItems().addAll(Category.Science,Category.Art,Category.Geography,Category.History,Category.Religion);
-        //categories.getItems().addAll("Science", "Art", "Religion","History","Geography");
-        //default field;
         categories.getSelectionModel().select(Category.Science);
     }
     @FXML

@@ -32,7 +32,9 @@ public class ConfirmOrderBooksController implements Initializable {
         //TODO query to get all books that should be ordered;
 
         ArrayList<BookOrders> bookOrdersArray = Queries.getBookOrders(utils.getConnection());
-
+        for (int  i = 0 ; i<bookOrdersArray.size();i++){
+            books.getItems().add(bookOrdersArray.get(i));
+        }
 
         //then add them to books
         firstColumn.setCellValueFactory(new PropertyValueFactory<BookOrders,String>("ISBN"));
@@ -45,6 +47,11 @@ public class ConfirmOrderBooksController implements Initializable {
         BookOrders order = books.getSelectionModel().getSelectedItem();
         // confirm the order in the DB
         Queries.confirmOrder(order.ISBN,utils.getConnection());
+        try {
+            utils.getConnection().commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         //remove from table
         books.getItems().remove(order);
     }

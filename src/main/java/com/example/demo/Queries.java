@@ -148,7 +148,7 @@ public class Queries {
 
 
          try {
-             String query = "Delete from book_order where ISBN = ?";
+             String query = "Delete from Book_Order where ISBN = ?";
              PreparedStatement deleteOrder = conn.prepareStatement(query);
              deleteOrder.setString(1,ISBN);
              deleteOrder.execute();
@@ -161,7 +161,7 @@ public class Queries {
          ArrayList<BookOrders> bookOrdersArray = new ArrayList<>();
          try {
              String query = "select * "
-                 + "from book_order";
+                 + "from Book_Order";
              PreparedStatement getBookOrders = conn.prepareStatement(query);
              ResultSet bookOrders = getBookOrders.executeQuery();
              while (bookOrders.next()){
@@ -179,11 +179,12 @@ public class Queries {
 
      static void promoteUser(String email,Connection conn){
          try {
-             String query = "Update customer "
+             String query = "Update CUSTOMER "
                  + "set Manager = 1 where Email = ?";
              PreparedStatement updateUserStatus = conn.prepareStatement(query);
              updateUserStatus.setString(1,email);
              updateUserStatus.execute();
+             conn.commit();
 
 
          } catch (SQLException throwables) {
@@ -194,7 +195,7 @@ public class Queries {
      static boolean getManagerialStatus(String email,Connection conn){
          try {
              String query = "Select Manager "
-                 + "from Manager where Email = ?";
+                 + "from CUSTOMER where Email = ?";
              PreparedStatement getStatus = conn.prepareStatement(query);
              getStatus.setString(1,email);
              ResultSet status = getStatus.executeQuery();
