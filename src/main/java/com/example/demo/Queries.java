@@ -192,15 +192,16 @@ public class Queries {
          }
      }
 
-     static boolean getManagerialStatus(String email,Connection conn){
+     static boolean userFound(String username,Connection conn){
          try {
-             String query = "Select Manager "
-                 + "from CUSTOMER where Email = ?";
+             String query = "Select Username "
+                 + "from CUSTOMER where Username = ?";
              PreparedStatement getStatus = conn.prepareStatement(query);
-             getStatus.setString(1,email);
+             getStatus.setString(1,username);
+
              ResultSet status = getStatus.executeQuery();
-             boolean result = status.getBoolean("Manager");
-             return result;
+             String result = status.getString("Username");
+             return status.next();
 
          } catch (SQLException throwables) {
              throwables.printStackTrace();
