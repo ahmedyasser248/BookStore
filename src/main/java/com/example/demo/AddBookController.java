@@ -119,7 +119,9 @@ public class AddBookController implements Initializable {
 
 
         }catch (SQLException e){
-            System.out.println("error occurred");
+            a.setAlertType(Alert.AlertType.WARNING);
+            a.setContentText("check your data");
+            a.show();
             e.printStackTrace();
         }
         return true;
