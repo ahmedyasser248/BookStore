@@ -63,6 +63,8 @@ public class ModifyBookController implements Initializable {
                isbn = result.getString("ISBN");
                 authors = result.getString("Author_Name");
                 String yearx = result.getString("Publication_Year");
+                yearx=yearx.substring(0,4);
+                System.out.println(yearx);
                 String titlex = result.getString("Title");
                 String publisher_Name = result.getString("Publisher_Name");
                 Category category= Category.valueOf(result.getString("Category"));
@@ -122,7 +124,8 @@ public class ModifyBookController implements Initializable {
             String query="UPDATE BOOK set Title="+"'"+title.getText()+"', "+"Publisher_Name="+"'"+publisher.getText()+"', "+"Publication_Year="+year.getText()+
                     " ,Selling_Price="+sellingPrice.getText()+", "+
                     "Category="+"'"+categories.getSelectionModel().getSelectedItem()+"', "+"Min_Quantity="+quantity.getText()
-                    +" , "+"In_Stock = "+inStockTf.getText()+" WHERE ISBN = "+isbn;
+                    +" , "+"In_Stock = "+inStockTf.getText()+" WHERE ISBN = '"+isbn+"'";
+            System.out.println(query);
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.execute();
             //check for authors
@@ -169,6 +172,6 @@ public class ModifyBookController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         categories.getItems().removeAll(categories.getItems());
         categories.getItems().addAll(Category.Religion,Category.History,Category.Art,Category.Geography,Category.Science);
-
+        utils.createConnection();
     }
 }

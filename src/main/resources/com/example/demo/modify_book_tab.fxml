@@ -23,7 +23,6 @@
             <TextField fx:id="searchBox" promptText="search by ISBN" />
             <TextField fx:id="title" promptText="title" />
             <TextField fx:id="author" promptText="author" />
-            <TextField fx:id="publication" promptText="publication" />
             <TextField fx:id="publisher" promptText="publisher" />
             <TextField fx:id="quantity" promptText="quantity" />
             <TextField fx:id="sellingPrice" promptText="selling price" />
