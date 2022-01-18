@@ -39,7 +39,7 @@ public class utils {
     public static void createConnection(){
         String myUrl = "jdbc:mysql://localhost/BookStore";
         try {
-            connection = DriverManager.getConnection(myUrl,"ahmed","ahmedyasser248");
+            connection = DriverManager.getConnection(myUrl,"ahmed","your password");
             connection.setAutoCommit(false);
         } catch (SQLException e) {
             e.printStackTrace();

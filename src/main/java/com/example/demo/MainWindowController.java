@@ -98,7 +98,7 @@ public class MainWindowController implements Initializable {
     @FXML
     void checkout(){
         try{
-            cart.getItems().removeAll();
+            cart.getItems().removeAll(cart.getItems());
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("checkout.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
