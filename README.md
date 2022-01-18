@@ -12,10 +12,12 @@ the manager to order books from publisher when a shortage in books occurs and th
 * javafx for GUI
 * MYSQL database
 
-#Analysis
+##Analysis
 check 
 <a href="https://docs.google.com/document/d/1EOEwltV-NHVO6g2dYn0r0wqH2fxYhbNm4ZLPrAyawtI/edit?usp=sharing" target="_blank">Report</a>
 
-###ERD Diagram
+##ERD Diagram
 ![erd diagram](erd.png)
+
+
 
