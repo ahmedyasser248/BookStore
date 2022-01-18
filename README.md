@@ -10,7 +10,7 @@ the manager to order books from publisher when a shortage in books occurs and th
 ## Technologies
 * java JDBC
 * javafx for GUI
-* MYSQL database
+* MYSQL database.
 
 ##Analysis
 check 
